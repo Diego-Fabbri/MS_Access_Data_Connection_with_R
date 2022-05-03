@@ -40,7 +40,7 @@ close(conn)# close the connection
 
 #######TABLES RECAP#########
 
-sink("./Tables Recap.txt",append = TRUE)
+sink("./Tables Recap.txt",append = FALSE)
 
 for (i in 1:nrow(Tables_List)) {
   

@@ -5,7 +5,7 @@ library(RODBC)
 library(usefun)
 
 ## set the database path
-DbPath <- "C:/Users/fabbrid/Documents/MyDB.accdb" ##Set MS Access file's path
+DbPath <- "C:/Users/fabbrid/Documents/CaseStudy_Palmera.accdb" ##Set MS Access file's path
 
 ## connect to the database
 conn <- odbcConnectAccess2007(DbPath,rows_at_time = 1) 
@@ -28,11 +28,21 @@ for (i in 1:nrow(Tables_List)) {
                         Tables_List[i,], #set name of the table you want to save
                         as.is = T)
   
-  ## save your table as csv 
+## Export your table as .csv 
   write.csv(table_tmp,
             # sep = " ",
             file = paste(Tables_List[i,],".csv"),
             row.names=FALSE)
+  
+#Export table as .txt file
+write.table(table_tmp, 
+            file = paste(Tables_List[i,],".txt"),
+            append = FALSE, 
+            #sep = "",
+            #dec = ".",
+            quote = FALSE,
+            row.names = FALSE,
+            col.names = TRUE)
 
 }
 

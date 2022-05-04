@@ -11,15 +11,25 @@ conn <- odbcConnectAccess2007(DbPath,rows_at_time = 1) #create and open a connec
 
 sqlTables(conn) #Get list of database tables
 
-table_name <- sqlFetch(conn,
-                       "table_name", #set name of the table you want to save
-                       as.is = T)# read your database table an save it
+My_table <- sqlFetch(conn,
+                     "name_table_you_want", #set name of the table you want to save
+                      as.is = T)    #read your database table an save it
 
 close(conn)# close the connection
 
-colnames(table_name) 
+colnames(My_table) 
 
-write.csv(table_name,
-          "table_name.csv",
+write.csv(My_table,
+          "My_table.csv",#Set file's name
           row.names = FALSE)# save your data as csv for further analysis
+
+#Get Table details
+for (j in 1:ncol(My_table)) {
+  print(paste("--- ",
+              colnames(My_table)[j],
+              "has",
+              length(unique(My_table[,j])),
+              "distinct values"))
+}
+
 ############################

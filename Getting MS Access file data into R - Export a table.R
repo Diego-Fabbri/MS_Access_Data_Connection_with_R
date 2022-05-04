@@ -1,4 +1,6 @@
 # install.package(RODBC)
+# install.packages('readr', dependencies = TRUE)
+library(readr)
 library(RODBC)
 
 ## set the database path
@@ -17,5 +19,7 @@ close(conn)# close the connection
 
 colnames(table_name) 
 
-write.csv(table_name,"table_name.csv")# save your data as csv for further analysis
+write.csv(table_name,
+          "table_name.csv",
+          row.names = FALSE)# save your data as csv for further analysis
 ############################
